@@ -2,7 +2,6 @@ import streamlit as st
 from PIL import Image
 import time
 import speech_recognition as sr
-import pyaudio
 import wave
 from chatbot import get_chatbot_response  # Ensure chatbot.py exists with this function
 import random
@@ -132,3 +131,4 @@ elif page == "Voice Chat":
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
