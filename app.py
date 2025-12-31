@@ -29,7 +29,7 @@ if "messages" not in st.session_state:
     
     stream = audio.open(format=format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
     st.write("🎙️ Recording... Speak now!")'''
-    user_text = st.text_input("Ask your AI Teacher")
+    
     
     frames = []
     for _ in range(0, int(rate / chunk * duration)):
@@ -136,6 +136,7 @@ elif page == "Voice Chat":
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
 
 
 
