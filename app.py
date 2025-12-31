@@ -21,14 +21,14 @@ st.set_page_config(
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-'''def record_audio(filename="audio.wav", duration=5, rate=44100, channels=1):
+def record_audio(filename="audio.wav", duration=5, rate=44100, channels=1):
     """Records audio and saves it as a WAV file."""
     chunk = 1024
     format = pyaudio.paInt16
     audio = pyaudio.PyAudio()
     
     stream = audio.open(format=format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
-    st.write("🎙️ Recording... Speak now!")'''
+    st.write("🎙️ Recording... Speak now!")
     
     
     frames = []
@@ -136,6 +136,7 @@ elif page == "Voice Chat":
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
 
 
 
