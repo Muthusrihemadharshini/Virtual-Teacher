@@ -27,30 +27,42 @@ if "messages" not in st.session_state:
 
 def record_audio(filename="audio.wav", duration=5, rate=44100, channels=1):
     """Records audio and saves it as a WAV file."""
+
+    try:
+        import pyaudio
+    except ModuleNotFoundError:
+        st.error("🎤 Voice recording is not supported in this environment.")
+        return None
+
     chunk = 1024
-    import pyaudio
     format = pyaudio.paInt16
     audio = pyaudio.PyAudio()
-    
-    stream = audio.open(format=format, channels=channels, rate=rate, input=True, frames_per_buffer=chunk)
+
+    stream = audio.open(
+        format=format,
+        channels=channels,
+        rate=rate,
+        input=True,
+        frames_per_buffer=chunk
+    )
+
     st.write("🎙️ Recording... Speak now!")
-    
-    
+
     frames = []
-    for _ in range(0, int(rate / chunk * duration)):
+    for _ in range(int(rate / chunk * duration)):
         data = stream.read(chunk)
         frames.append(data)
-    
+
     stream.stop_stream()
     stream.close()
     audio.terminate()
-    
-    with wave.open(filename, 'wb') as wf:
+
+    with wave.open(filename, "wb") as wf:
         wf.setnchannels(channels)
         wf.setsampwidth(audio.get_sample_size(format))
         wf.setframerate(rate)
-        wf.writeframes(b''.join(frames))
-    
+        wf.writeframes(b"".join(frames))
+
     return filename
 
 def transcribe_audio(file_path="audio.wav"):
@@ -129,6 +141,7 @@ elif page == "Interactive Story Mode":
         st.success("Great choice! Your story continues...")
 
 # Voice Chat
+# Voice Chat
 elif page == "Voice Chat":
     st.write("### 🎤 Talk to Your AI Teacher!")
 
@@ -143,15 +156,21 @@ elif page == "Voice Chat":
     else:
         if st.button("Record Voice Message"):
             audio_file = record_audio()
-            user_voice_input = transcribe_audio(audio_file)
-            st.write(f"**You said:** {user_voice_input}")
-            response = get_chatbot_response(user_voice_input)
-            st.write(f"**AI Teacher:** {response}")
+
+            if audio_file:
+                user_voice_input = transcribe_audio(audio_file)
+                st.write(f"**You said:** {user_voice_input}")
+                response = get_chatbot_response(user_voice_input)
+                st.write(f"**AI Teacher:** {response}")
+
+
+            
 
 
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
 
 
 
