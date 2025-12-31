@@ -5,6 +5,10 @@ import speech_recognition as sr
 import wave
 from Chat import get_chatbot_response  # Ensure chatbot.py exists with this function
 import random
+import os
+
+IS_CLOUD = os.getenv("STREAMLIT_CLOUD") is not None
+
 
 
 
@@ -24,6 +28,7 @@ if "messages" not in st.session_state:
 def record_audio(filename="audio.wav", duration=5, rate=44100, channels=1):
     """Records audio and saves it as a WAV file."""
     chunk = 1024
+    import pyaudio
     format = pyaudio.paInt16
     audio = pyaudio.PyAudio()
     
@@ -126,16 +131,28 @@ elif page == "Interactive Story Mode":
 # Voice Chat
 elif page == "Voice Chat":
     st.write("### 🎤 Talk to Your AI Teacher!")
-    if st.button("Record Voice Message"):
-        audio_file = record_audio()
-        user_voice_input = transcribe_audio(audio_file)
-        st.write(f"**You said:** {user_voice_input}")
-        response = get_chatbot_response(user_voice_input)
-        st.write(f"**AI Teacher:** {response}")
+
+    if IS_CLOUD:
+        st.warning("🎤 Voice recording is disabled on cloud deployment.")
+        user_text = st.text_input("Type your question instead")
+
+        if user_text:
+            response = get_chatbot_response(user_text)
+            st.write(f"**AI Teacher:** {response}")
+
+    else:
+        if st.button("Record Voice Message"):
+            audio_file = record_audio()
+            user_voice_input = transcribe_audio(audio_file)
+            st.write(f"**You said:** {user_voice_input}")
+            response = get_chatbot_response(user_voice_input)
+            st.write(f"**AI Teacher:** {response}")
+
 
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
 
 
 
