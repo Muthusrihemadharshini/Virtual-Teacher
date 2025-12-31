@@ -3,7 +3,7 @@ from PIL import Image
 import time
 import speech_recognition as sr
 import wave
-from chatbot import get_chatbot_response  # Ensure chatbot.py exists with this function
+from Chat import get_chatbot_response  # Ensure chatbot.py exists with this function
 import random
 
 # Set page configuration
@@ -131,4 +131,5 @@ elif page == "Voice Chat":
 # Footer
 st.markdown("---")
 st.caption("👩‍🏫 Created with ❤️ by MSHD")
+
 
