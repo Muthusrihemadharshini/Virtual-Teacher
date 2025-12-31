@@ -11,3 +11,6 @@ langchain-groq
 groq
 
 python-dotenv
+
+openai
+
