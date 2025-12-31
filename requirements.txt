@@ -1,5 +1,13 @@
 streamlit
-SpeechRecognition
 numpy
 pandas
 scikit-learn
+
+SpeechRecognition
+pydub
+
+langchain
+langchain-groq
+groq
+
+python-dotenv
