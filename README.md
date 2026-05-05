@@ -61,6 +61,4 @@ Developed an AI-powered teaching assistant that:
 ## 🔗 Live Demo
 👉 [Try the App](https://3otmulpbnrpbvnqemcztaq.streamlit.app/)
 
----
 
-## 📂 Project Structure
