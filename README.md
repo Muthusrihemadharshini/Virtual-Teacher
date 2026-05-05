@@ -34,7 +34,7 @@ Developed an AI-powered teaching assistant that:
 
 ## 🛠 Tech Stack
 - Python (Machine Learning Model)  
-- HTML, CSS, JavaScript (Frontend)  
+- Streamlit (Frontend)  
 - API Integration  
 - VS Code  
 
